@@ -11,5 +11,4 @@ func Test(t *testing.T) {
 	a.Equal(4, main([]int{4, 1, 2, 1, 2}))
 	a.Equal(1, main([]int{1}))
 	a.Equal(-2, main([]int{-1, -1, -2, 1, 1}))
-
 }
