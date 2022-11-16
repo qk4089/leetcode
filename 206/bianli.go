@@ -10,12 +10,27 @@ type ListNode struct {
 	Next *ListNode
 }
 
-func main(head *ListNode) *ListNode {
+func reverse(head *ListNode) *ListNode {
 	var result *ListNode
 	for head != nil {
 		tmp := head
 		head, tmp.Next = head.Next, result
 		result = tmp
 	}
+	return result
+}
+
+// 反转前N个节点(包含N)
+func reverseN(head *ListNode, n int) *ListNode {
+	if head == nil {
+		return head
+	}
+	var result *ListNode
+	point := head
+	for count := 0; point != nil && count < n; count++ {
+		tmp := point
+		point, tmp.Next, result = point.Next, result, tmp
+	}
+	head.Next = point
 	return result
 }
