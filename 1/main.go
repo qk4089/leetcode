@@ -10,7 +10,7 @@ package _1
 //	只会存在一个有效答案
 //	进阶：你可以想出一个时间复杂度小于O(n2)的算法吗？
 
-func main(nums []int, target int) []int {
+func towSum(nums []int, target int) []int {
 	index := make(map[int]int)
 	for i := 0; i < len(nums); i++ {
 		if val, ok := index[target-nums[i]]; ok {
