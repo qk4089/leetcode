@@ -7,5 +7,5 @@ import (
 
 func Test(t *testing.T) {
 	a := assert.New(t)
-	a.True(main("()"))
+	a.True(isValid("()"))
 }

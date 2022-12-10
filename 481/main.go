@@ -15,7 +15,7 @@ package _481
 //输出：3
 //解释：神奇字符串 s 的前 6 个元素是 “122112”，它包含三个 1，因此返回 3
 
-func main(n int) int {
+func magicalString(n int) int {
 	count := 1
 	if n < 4 {
 		return count

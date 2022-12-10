@@ -18,7 +18,7 @@ import "math"
 //输出：12
 //解释：偷窃1号房屋(金额=2),偷窃3号房屋(金额=9)，接着偷窃5号房屋(金额=1)。偷窃到的最高金额=2+9+1=12。
 
-func main(nums []int) int {
+func rob(nums []int) int {
 	dp := make([]int, len(nums)+1)
 	dp[0] = 0
 	dp[1] = 1

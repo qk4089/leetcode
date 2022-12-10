@@ -25,7 +25,7 @@ import "bytes"
 //输出: [(10, 0)]
 //解释:1.0 是不被允许的
 
-func main(s string) []string {
+func ambiguousCoordinates(s string) []string {
 	b, result := []byte(s)[1:len(s)-1], make([]string, 0)
 	l := len(b)
 	var buffer bytes.Buffer

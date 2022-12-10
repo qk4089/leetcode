@@ -23,7 +23,7 @@ import "math"
 //	0 <= xi, yi, qi <= 50
 //	1 <= radius <= 50
 
-func main(towers [][]int, radius int) []int {
+func bestCoordinate(towers [][]int, radius int) []int {
 	if len(towers) == 1 {
 		if towers[0][2] != 0 {
 			return towers[0][:2]

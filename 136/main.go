@@ -11,7 +11,7 @@ package _136
 //输出: 4
 
 // a^b^a = b
-func main(nums []int) int {
+func singleNumber(nums []int) int {
 	sum := 0
 	for _, v := range nums {
 		sum ^= v

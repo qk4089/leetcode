@@ -13,7 +13,7 @@ type ListNode struct {
 	Next *ListNode
 }
 
-func main(head *ListNode) bool {
+func isPalindrome(head *ListNode) bool {
 	var result *ListNode
 	fast, slow := head, head
 	for fast != nil && fast.Next != nil {

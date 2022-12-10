@@ -27,13 +27,13 @@ import (
 func minWindow(s string, t string) string {
 	wMap, tMap := make(map[byte]int), make(map[byte]int)
 	for _, c := range []byte(t) {
-		increase(tMap, c)
+		tMap[c]++
 	}
-	start, length, left, right, valid, bs := 0, math.MaxInt, 0, 0, 0, []byte(s)
-	for right < len(bs) {
-		if _, ok := tMap[bs[right]]; ok {
-			increase(wMap, bs[right])
-			if wMap[bs[right]] == tMap[bs[right]] {
+	start, length, left, right, valid := 0, math.MaxInt, 0, 0, 0
+	for right < len(s) {
+		if _, ok := tMap[s[right]]; ok {
+			wMap[s[right]]++
+			if wMap[s[right]] == tMap[s[right]] {
 				valid++
 			}
 		}
@@ -42,11 +42,11 @@ func minWindow(s string, t string) string {
 			if right-left < length {
 				start, length = left, right-left
 			}
-			if _, ok := tMap[bs[left]]; ok {
-				if wMap[bs[left]] == tMap[bs[left]] {
+			if _, ok := tMap[s[left]]; ok {
+				if wMap[s[left]] == tMap[s[left]] {
 					valid--
 				}
-				wMap[bs[left]] = wMap[bs[left]] - 1
+				wMap[s[left]] = wMap[s[left]] - 1
 			}
 			left++
 		}
@@ -54,7 +54,7 @@ func minWindow(s string, t string) string {
 	if length == math.MaxInt {
 		return ""
 	} else {
-		return string(bs[start : start+length])
+		return string(s[start : start+length])
 	}
 }
 

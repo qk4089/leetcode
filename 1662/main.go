@@ -17,7 +17,7 @@ package _1662
 //word2 表示的字符串为 "a" + "bc" -> "abc"
 //两个字符串相同，返回 true
 
-func main(word1 []string, word2 []string) bool {
+func arrayStringsAreEqual(word1 []string, word2 []string) bool {
 	p1, p2, sum1, sum2 := 0, 0, 0, 0
 	l1, l2 := len(word1), len(word2)
 	for p1 < l1 {

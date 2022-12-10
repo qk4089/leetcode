@@ -11,7 +11,7 @@ type ListNode struct {
 	Next *ListNode
 }
 
-func main(head *ListNode) *ListNode {
+func middleNode(head *ListNode) *ListNode {
 	slow, fast := head, head
 	for fast != nil && fast.Next != nil {
 		slow = slow.Next

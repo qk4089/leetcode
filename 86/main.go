@@ -13,7 +13,7 @@ type ListNode struct {
 	Next *ListNode
 }
 
-func main(head *ListNode, x int) *ListNode {
+func partition(head *ListNode, x int) *ListNode {
 	l1, l2 := &ListNode{}, &ListNode{}
 	p1, p2 := l1, l2
 	for head != nil {

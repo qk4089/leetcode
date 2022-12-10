@@ -14,7 +14,7 @@ type ListNode struct {
 	Next *ListNode
 }
 
-func main(head *ListNode, k int) *ListNode {
+func reverseKGroup(head *ListNode, k int) *ListNode {
 	p1, p2 := head, head
 	count := 0
 	for ; count < k && p1 != nil; count++ {
@@ -25,7 +25,7 @@ func main(head *ListNode, k int) *ListNode {
 	}
 	p2.Next = nil
 	result := reverse(head)
-	head.Next = main(p1, k)
+	head.Next = reverseKGroup(p1, k)
 	return result
 }
 

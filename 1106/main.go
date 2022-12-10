@@ -26,10 +26,10 @@ package _1106
 //输入：expression = "|(&(t,f,t),!(t))"
 //输出：false
 
-func main(expression string) bool {
-	b, stack := []byte(expression), &Stack{}
-	for index := 0; index < len(b); index++ {
-		char := b[index]
+func parseBoolExpr(expression string) bool {
+	stack := &Stack{}
+	for index := 0; index < len(expression); index++ {
+		char := expression[index]
 		if char == ',' {
 			continue
 		}

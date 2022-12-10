@@ -18,15 +18,14 @@ package _1678
 //输入：command = "(al)G(al)()()G"
 //输出："alGalooG"
 
-func main(command string) string {
-	b := []byte(command)
+func interpret(command string) string {
 	str := make([]byte, 0)
-	for i := 0; i < len(b); i++ {
-		if b[i] == 'G' {
+	for i := 0; i < len(command); i++ {
+		if command[i] == 'G' {
 			str = append(str, 'G')
-		} else if b[i] == '(' {
+		} else if command[i] == '(' {
 			i++
-			if b[i] == ')' {
+			if command[i] == ')' {
 				str = append(str, 'o')
 			} else {
 				str = append(str, 'a', 'l')

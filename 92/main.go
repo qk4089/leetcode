@@ -13,7 +13,7 @@ type ListNode struct {
 	Next *ListNode
 }
 
-func main(head *ListNode, left int, right int) *ListNode {
+func reverseBetween(head *ListNode, left int, right int) *ListNode {
 	if head.Next == nil || left == right {
 		return head
 	}

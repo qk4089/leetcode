@@ -18,14 +18,14 @@ package _1668
 //输出：1
 //解释："ba" 是 "ababc" 的子字符串，但 "baba" 不是 "ababc" 的子字符串。
 
-func main(sequence string, word string) int {
-	max, start, index, seq, wd := 0, 0, 0, []byte(sequence), []byte(word)
-	sSize, wSize := len(seq), len(wd)
+func maxRepeating(sequence string, word string) int {
+	max, start, index := 0, 0, 0
+	sSize, wSize := len(sequence), len(word)
 	for index < sSize {
 		count := 0
 		for {
 			for i := 0; i < wSize; i++ {
-				if index >= sSize || wd[i] != seq[index] {
+				if index >= sSize || word[i] != sequence[index] {
 					goto LABEL
 				}
 				index++

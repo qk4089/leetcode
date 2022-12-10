@@ -7,7 +7,7 @@ import (
 
 func Test(t *testing.T) {
 	a := assert.New(t)
-	a.Equal("Goal", main("G()(al)"))
-	a.Equal("Gooooal", main("G()()()()(al)"))
-	a.Equal("alGalooG", main("(al)G(al)()()G"))
+	a.Equal("Goal", interpret("G()(al)"))
+	a.Equal("Gooooal", interpret("G()()()()(al)"))
+	a.Equal("alGalooG", interpret("(al)G(al)()()G"))
 }

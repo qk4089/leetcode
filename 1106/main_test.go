@@ -7,8 +7,8 @@ import (
 
 func Test(t *testing.T) {
 	a := assert.New(t)
-	a.True(main("!(f)"))
-	a.True(main("|(f,t)"))
-	a.False(main("&(t,f)"))
-	a.False(main("|(&(t,f,t),!(t))"))
+	a.True(parseBoolExpr("!(f)"))
+	a.True(parseBoolExpr("|(f,t)"))
+	a.False(parseBoolExpr("&(t,f)"))
+	a.False(parseBoolExpr("|(&(t,f,t),!(t))"))
 }

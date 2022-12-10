@@ -7,6 +7,6 @@ import (
 
 func Test(t *testing.T) {
 	a := assert.New(t)
-	a.True(main("book"))
-	a.False(main("textbook"))
+	a.True(halvesAreAlike("book"))
+	a.False(halvesAreAlike("textbook"))
 }

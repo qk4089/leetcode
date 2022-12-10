@@ -18,14 +18,14 @@ package _1704
 //输出：false
 //解释：a="text"且b="book"。a中有1个元音，b中有2个元音。因此，a和b不相似。注意，元音o在b中出现两次，记为2个
 
-func main(s string) bool {
+func halvesAreAlike(s string) bool {
 	meta := map[byte]byte{'a': 1, 'e': 1, 'i': 1, 'o': 1, 'u': 1, 'A': 1, 'E': 1, 'I': 1, 'O': 1, 'U': 1}
-	p, b, c1, c2 := len(s)/2-1, []byte(s), 0, 0
-	for i := p + 1; i < len(b); i++ {
-		if _, ok := meta[b[i]]; ok {
+	p, c1, c2 := len(s)/2-1, 0, 0
+	for i := p + 1; i < len(s); i++ {
+		if _, ok := meta[s[i]]; ok {
 			c1++
 		}
-		if _, ok := meta[b[p]]; ok {
+		if _, ok := meta[s[p]]; ok {
 			c2++
 		}
 		p--

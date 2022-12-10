@@ -17,7 +17,7 @@ type ListNode struct {
 	Next *ListNode
 }
 
-func main(lists []*ListNode) *ListNode {
+func mergeKLists(lists []*ListNode) *ListNode {
 	if len(lists) == 0 {
 		return nil
 	}

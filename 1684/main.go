@@ -21,7 +21,7 @@ package _1684
 //输出：4
 
 // hashtable
-func main(allowed string, words []string) int {
+func countConsistentStrings(allowed string, words []string) int {
 	var aMap = make(map[byte]byte, len(allowed))
 	for _, val := range []byte(allowed) {
 		aMap[val] = 'y'

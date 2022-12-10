@@ -26,7 +26,7 @@ import "math"
 //第一次移动，从 0 到 1 。
 //第二次移动，从 1 到 3 。
 
-func main(target int) int {
+func reachNumber(target int) int {
 	var sum float64 = 0
 	count, tar := 1, math.Abs(float64(target))
 	for {

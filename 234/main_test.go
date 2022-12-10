@@ -8,9 +8,9 @@ import (
 func Test(t *testing.T) {
 	a := assert.New(t)
 	l1 := &ListNode{1, nil}
-	a.True(main(l1))
+	a.True(isPalindrome(l1))
 	l2 := &ListNode{1, &ListNode{2, &ListNode{2, &ListNode{1, nil}}}}
-	a.True(main(l2))
+	a.True(isPalindrome(l2))
 	l3 := &ListNode{1, &ListNode{2, &ListNode{3, &ListNode{2, &ListNode{1, nil}}}}}
-	a.True(main(l3))
+	a.True(isPalindrome(l3))
 }

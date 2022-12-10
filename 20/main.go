@@ -20,9 +20,10 @@ package _20
 //输入：s = "(]"
 //输出：false
 
-func main(s string) bool {
-	b, stack := []byte(s), &Stack{}
-	for _, v := range b {
+func isValid(s string) bool {
+	stack := &Stack{}
+	for i := 0; i < len(s); i++ {
+		v := s[i]
 		switch v {
 		case ')', ']', '}':
 			data := stack.pop()

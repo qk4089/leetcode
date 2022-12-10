@@ -18,19 +18,19 @@ func longestPalindrome(s string) string {
 	if len(s) == 1 {
 		return s
 	}
-	start, end, b := -1, -1, []byte(s)
+	start, end := -1, -1
 	for point := 0; point < len(s)-1 && len(s)-point > (end-start)/2; point++ {
-		if _start, _end, ok := getMaxPalindrome(b, point, point); ok {
+		if _start, _end, ok := getMaxPalindrome(s, point, point); ok {
 			start, end = max(start, end, _start, _end)
 		}
-		if _start, _end, ok := getMaxPalindrome(b, point, point+1); ok {
+		if _start, _end, ok := getMaxPalindrome(s, point, point+1); ok {
 			start, end = max(start, end, _start, _end)
 		}
 	}
-	return string(b[start : end+1])
+	return string(s[start : end+1])
 }
 
-func getMaxPalindrome(s []byte, p0 int, p1 int) (int, int, bool) {
+func getMaxPalindrome(s string, p0 int, p1 int) (int, int, bool) {
 	flag := false
 	for p0 >= 0 && p1 < len(s) && s[p0] == s[p1] {
 		flag = true
