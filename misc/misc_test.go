@@ -34,3 +34,7 @@ func Test_b_search_last(t *testing.T) {
 	a.Equal(7, bSearchLast([]int{1, 3, 3, 3, 8, 9, 11, 15, 19}, 15))
 	a.Equal(8, bSearchLast([]int{1, 3, 3, 3, 8, 9, 11, 15, 15}, 15))
 }
+
+func Test_findQueens(t *testing.T) {
+	findQueens(0, make([]int, 8))
+}
