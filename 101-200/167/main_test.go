@@ -7,6 +7,6 @@ import (
 
 func Test(t *testing.T) {
 	a := assert.New(t)
-	a.Equal([]int{1, 2}, main([]int{2, 7, 11, 16}, 9))
-	a.Equal([]int{1, 2}, main([]int{-1, 0}, -1))
+	a.Equal([]int{1, 2}, towSum([]int{2, 7, 11, 16}, 9))
+	a.Equal([]int{1, 2}, towSum([]int{-1, 0}, -1))
 }
