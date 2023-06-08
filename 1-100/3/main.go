@@ -21,20 +21,19 @@ package _3
 //请注意，你的答案必须是子串的长度，"pwke"是一个子序列，不是子串。
 
 func lengthOfLongestSubstring(s string) int {
-	max, left, right, wMap := 0, 0, 0, make(map[byte]int)
+	maxV, left, right, window := 0, 0, 0, make(map[byte]int)
 	for ; right < len(s); right++ {
-		if v, exist := wMap[s[right]]; exist {
-			if max < right-left {
-				max = right - left
-			}
-			if v >= left {
-				left = v + 1
-			}
+		if idx, exist := window[s[right]]; exist {
+			left, maxV = max(left, idx+1), max(maxV, right-left)
 		}
-		wMap[s[right]] = right
+		window[s[right]] = right
 	}
-	if max < right-left {
-		return right - left
+	return max(maxV, right-left)
+}
+
+func max(x, y int) int {
+	if x > y {
+		return x
 	}
-	return max
+	return y
 }
