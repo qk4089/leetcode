@@ -7,5 +7,6 @@ import (
 
 func Test(t *testing.T) {
 	a := assert.New(t)
-	a.Equal("bb", longestPalindrome("cbbd"))
+	a.Equal("bdb", longestPalindrome("cbdba"))
+	//fmt.Print(getPalindrome("aba", 1, 1))
 }

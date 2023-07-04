@@ -13,9 +13,7 @@ type ListNode struct {
 func reverse(head *ListNode) *ListNode {
 	var result *ListNode
 	for head != nil {
-		tmp := head
-		head, tmp.Next = head.Next, result
-		result = tmp
+		head, head.Next, result = head.Next, result, head
 	}
 	return result
 }

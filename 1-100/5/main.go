@@ -15,33 +15,26 @@ package _5
 //输出："bb"
 
 func longestPalindrome(s string) string {
-	if len(s) == 1 {
-		return s
+	result := string(s[0])
+	for i := 0; i < len(s)-1; i++ {
+		left := getPalindrome(s, i, i)
+		right := getPalindrome(s, i, i+1)
+		result = max(result, max(left, right))
 	}
-	start, end := -1, -1
-	for point := 0; point < len(s)-1 && len(s)-point > (end-start)/2; point++ {
-		if _start, _end, ok := getMaxPalindrome(s, point, point); ok {
-			start, end = max(start, end, _start, _end)
-		}
-		if _start, _end, ok := getMaxPalindrome(s, point, point+1); ok {
-			start, end = max(start, end, _start, _end)
-		}
-	}
-	return string(s[start : end+1])
+	return result
 }
 
-func getMaxPalindrome(s string, p0 int, p1 int) (int, int, bool) {
-	flag := false
-	for p0 >= 0 && p1 < len(s) && s[p0] == s[p1] {
-		flag = true
-		p0, p1 = p0-1, p1+1
+func getPalindrome(s string, left, right int) string {
+	for left >= 0 && right < len(s) && s[left] == s[right] {
+		left--
+		right++
 	}
-	return p0 + 1, p1 - 1, flag
+	return s[left+1 : right]
 }
 
-func max(s1 int, e1 int, s2 int, e2 int) (int, int) {
-	if e1-s1 > e2-s2 {
-		return s1, e1
+func max(x, y string) string {
+	if len(x) > len(y) {
+		return x
 	}
-	return s2, e2
+	return y
 }
