@@ -1,8 +1,6 @@
 package _76
 
-import (
-	"math"
-)
+import "math"
 
 //给你一个字符串s、一个字符串t。返回s中涵盖t所有字符的最小子串。如果s中不存在涵盖t所有字符的子串，则返回空字符串""。
 //注意
@@ -25,43 +23,38 @@ import (
 //解释:t中两个字符'a'均应包含在s的子串中， 因此没有符合条件的子字符串，返回空字符串。
 
 func minWindow(s string, t string) string {
-	wMap, tMap := make(map[byte]int), make(map[byte]int)
-	for _, c := range []byte(t) {
-		tMap[c]++
+	if len(s) < len(t) {
+		return ""
 	}
-	start, length, left, right, valid := 0, math.MaxInt, 0, 0, 0
+	tMap := make(map[byte]int)
+	for i := 0; i < len(t); i++ {
+		tMap[t[i]]++
+	}
+	minLeft, minRight, minLength, valid, left, right, sMap := 0, 0, math.MaxInt, 0, 0, 0, make(map[byte]int)
 	for right < len(s) {
 		if _, ok := tMap[s[right]]; ok {
-			wMap[s[right]]++
-			if wMap[s[right]] == tMap[s[right]] {
+			sMap[s[right]]++
+			if sMap[s[right]] == tMap[s[right]] {
 				valid++
 			}
 		}
 		right++
-		for valid == len(tMap) {
-			if right-left < length {
-				start, length = left, right-left
+		for valid >= len(tMap) {
+			if right-left < minLength {
+				minLeft, minRight, minLength = left, right, right-left
 			}
 			if _, ok := tMap[s[left]]; ok {
-				if wMap[s[left]] == tMap[s[left]] {
+				if sMap[s[left]] == tMap[s[left]] {
 					valid--
 				}
-				wMap[s[left]] = wMap[s[left]] - 1
+				sMap[s[left]]--
 			}
 			left++
 		}
 	}
-	if length == math.MaxInt {
+	if minLength != math.MaxInt {
+		return s[minLeft:minRight]
+	} else {
 		return ""
-	} else {
-		return string(s[start : start+length])
-	}
-}
-
-func increase(m map[byte]int, key byte) {
-	if v, ok := m[key]; ok {
-		m[key] = v + 1
-	} else {
-		m[key] = 1
 	}
 }
