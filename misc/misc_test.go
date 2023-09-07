@@ -38,3 +38,13 @@ func Test_b_search_last(t *testing.T) {
 func Test_findQueens(t *testing.T) {
 	findQueens(0, make([]int, 8))
 }
+
+func Test_flipCount(t *testing.T) {
+	a := assert.New(t)
+	a.EqualValues(two(3, 3), two(flipCount("BBFBFBB")))
+	a.EqualValues(two(2, 4), two(flipCount("BBFBFBBB")))
+}
+
+func two(a, b any) []any {
+	return []any{a, b}
+}
