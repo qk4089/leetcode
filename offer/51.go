@@ -1,5 +1,7 @@
 package offer
 
+import "sort"
+
 //在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组，求出这个数组中的逆序对的总数。
 
 //示例 1:
@@ -38,4 +40,26 @@ func merge(nums []int) int {
 		nums[i] = tmp[i]
 	}
 	return sum
+}
+
+// 使用树状数组
+func reversePairs2(nums []int) int {
+	tmp := make([]int, len(nums))
+	copy(tmp, nums)
+	sort.Ints(tmp)
+	for i := 0; i < len(nums); i++ {
+		nums[i] = sort.SearchInts(tmp, nums[i]) + 1
+	}
+	cnt, bit := 0, make([]int, len(nums)+1)
+	for i := len(nums) - 1; i >= 0; i-- {
+		x := nums[i] - 1
+		for x > 0 {
+			cnt += bit[x]
+			x -= x & (-x)
+		}
+		for idx := nums[i]; idx < len(bit); idx += idx & (-idx) {
+			bit[idx] += 1
+		}
+	}
+	return cnt
 }
