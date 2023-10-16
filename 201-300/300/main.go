@@ -21,18 +21,17 @@ package _300
 //进阶：你能将算法的时间复杂度降低到 O(n log(n)) 吗?
 
 func lengthOfLIS(nums []int) int {
-	maxV, result := 1, make([]int, len(nums))
-	result[0] = 1
-	for i := 1; i < len(nums); i++ {
-		result[i] = 1
+	ans, dp := 0, make([]int, len(nums))
+	for i := 0; i < len(nums); i++ {
+		dp[i] = 1
 		for j := 0; j < i; j++ {
 			if nums[i] > nums[j] {
-				result[i] = max(result[i], result[j]+1)
+				dp[i] = max(dp[j]+1, dp[i])
 			}
 		}
-		maxV = max(maxV, result[i])
+		ans = max(ans, dp[i])
 	}
-	return maxV
+	return ans
 }
 
 func max(x, y int) int {
