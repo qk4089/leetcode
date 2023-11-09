@@ -29,6 +29,10 @@ func Test_merge(t *testing.T) {
 	fmt.Println(arr)
 }
 
+func Test_fast(t *testing.T) {
+	fmt.Println(fast([]int{3, 6, 1, 5, 4, 2}))
+}
+
 func Test_count(t *testing.T) {
 	arr := []int{2, 5, 3, 0, 2, 3, 0, 3}
 	count(arr)

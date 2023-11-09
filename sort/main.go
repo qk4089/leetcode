@@ -69,8 +69,22 @@ func sort(x []int, y []int) []int {
 }
 
 // 快排
-func fast() {
-
+func fast(nums []int) []int {
+	if len(nums) <= 1 {
+		return nums
+	}
+	point, start, pivot := 0, 0, nums[len(nums)-1]
+	for point < len(nums)-1 {
+		if nums[point] < pivot {
+			nums[point], nums[start] = nums[start], nums[point]
+			start++
+		}
+		point++
+	}
+	nums[point], nums[start] = nums[start], nums[point]
+	fast(nums[:start])
+	fast(nums[start+1:])
+	return nums
 }
 
 // 计数
