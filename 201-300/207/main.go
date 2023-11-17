@@ -38,36 +38,36 @@ func canFinish(numCourses int, prerequisites [][]int) bool {
 		if judged[course] {
 			continue
 		}
-		if findSelf(course, selected, judged, courseMap) {
+		if findCircle(course, selected, judged, courseMap) {
 			return false
 		}
 	}
 	return true
 }
 
-func findSelf(course int, selected, judged map[int]bool, courseMap map[int][]int) bool {
+func findCircle(course int, selected, judged map[int]bool, courseMap map[int][]int) bool {
 	if judged[course] {
 		return false
 	}
 	if selected[course] {
 		return true
 	}
-	find := false
+	hasCircle := false
 	if require, ok := courseMap[course]; ok {
 		selected[course] = true
 		for _, val := range require {
 			if judged[val] {
 				continue
 			}
-			if findSelf(val, selected, judged, courseMap) {
-				find = true
+			if findCircle(val, selected, judged, courseMap) {
+				hasCircle = true
 				break
 			}
 		}
 		delete(selected, course)
 	}
-	if !find {
+	if !hasCircle {
 		judged[course] = true
 	}
-	return find
+	return hasCircle
 }
