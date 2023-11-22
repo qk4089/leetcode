@@ -32,14 +32,14 @@ package _785
 func isBipartite(graph [][]int) bool {
 	visited := make([]int, len(graph))
 	for i := 0; i < len(graph); i++ {
-		if visited[i] == 0 && len(graph[i]) > 0 && !success(i, visited, graph) {
+		if visited[i] == 0 && len(graph[i]) > 0 && !coloring(i, visited, graph) {
 			return false
 		}
 	}
 	return true
 }
 
-func success(start int, visited []int, graph [][]int) bool {
+func coloring(start int, visited []int, graph [][]int) bool {
 	queue := []int{start}
 	visited[start] = 1
 	for len(queue) > 0 {
