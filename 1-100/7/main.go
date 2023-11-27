@@ -4,6 +4,7 @@ import (
 	"math"
 )
 
+//https://leetcode.cn/problems/reverse-integer/
 //给你一个 32 位的有符号整数 x ，返回将 x 中的数字部分反转后的结果。
 
 //如果反转后整数超过 32 位的有符号整数的范围 [−2^31,  2^31−1] ，就返回 0。
@@ -33,20 +34,12 @@ func reverse(x int) int {
 	if x < 0 {
 		flag, x = -1, x*-1
 	}
-	arr := make([]byte, 0)
-	for x > 0 {
-		x, arr = x/10, append(arr, byte(x%10))
-	}
 	sum := 0
-	for _, b := range arr {
-		sum = sum*10 + int(b)
+	for x > 0 {
+		x, sum = x/10, sum*10+x%10
 		if sum > math.MaxInt32 {
 			return 0
 		}
 	}
 	return sum * flag
-}
-
-func sort() {
-
 }
