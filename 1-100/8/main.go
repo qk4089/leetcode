@@ -2,6 +2,7 @@ package _8
 
 import "math"
 
+//https://leetcode.cn/problems/string-to-integer-atoi/
 //请你来实现一个myAtoi(strings)函数，使其能将字符串转换成一个32位有符号整数（类似C/C++中的atoi函数）。
 //函数myAtoi(strings)的算法如下：
 //1.读入字符串并丢弃无用的前导空格

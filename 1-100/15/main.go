@@ -2,6 +2,7 @@ package _15
 
 import "sort"
 
+//https://leetcode.cn/problems/3sum/
 //给你一个整数数组 nums ，判断是否存在三元组 [nums[i], nums[j], nums[k]] 满足 i != j、i != k 且 j != k ，
 //同时还满足 nums[i] + nums[j] + nums[k] == 0 。请你返回所有和为 0 且不重复的三元组。
 //注意：答案中不可以包含重复的三元组。
@@ -30,35 +31,38 @@ import "sort"
 
 func threeSum(nums []int) [][]int {
 	sort.Ints(nums)
-	result := make([][]int, 0)
-	for i := 0; i < len(nums); i++ {
+	ans := make([][]int, 0)
+	for i := 0; i < len(nums)-2; i++ {
 		if nums[i] > 0 {
 			break
 		}
 		if i > 0 && nums[i] == nums[i-1] {
 			continue
 		}
-		tmp := two(nums[i+1:], 0-nums[i])
-		for j := 0; j < len(tmp); j++ {
-			tmp[j] = append(tmp[j], nums[i])
-			sort.Ints(tmp[j])
-			result = append(result, tmp[j])
+		for _, val := range twoSum(nums[i+1:], 0-nums[i]) {
+			ans = append(ans, append([]int{nums[i]}, val...))
 		}
 	}
-	return result
+	return ans
 }
 
-func two(nums []int, target int) [][]int {
-	result, usedMap := make([][]int, 0), make(map[int]bool)
-	for i := 0; i < len(nums); i++ {
-		if _, ok := usedMap[target-nums[i]]; ok {
-			if used, present := usedMap[nums[i]]; !present || !used {
-				usedMap[nums[i]] = true
-				usedMap[target-nums[i]] = true
-				result = append(result, []int{target - nums[i], nums[i]})
+func twoSum(nums []int, target int) [][]int {
+	left, right, result := 0, len(nums)-1, make([][]int, 0)
+	for nums[left] <= target && left < right {
+		sum := nums[left] + nums[right]
+		if sum == target {
+			result = append(result, []int{nums[left], nums[right]})
+			left, right = left+1, right-1
+			for left < right && nums[left] == nums[left-1] {
+				left++
 			}
+			for left < right && nums[right] == nums[right+1] {
+				right--
+			}
+		} else if sum < target {
+			left++
 		} else {
-			usedMap[nums[i]] = false
+			right--
 		}
 	}
 	return result
