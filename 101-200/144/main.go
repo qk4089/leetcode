@@ -30,13 +30,13 @@ func preorderTraversal(root *TreeNode) []int {
 	}
 	queue := []*TreeNode{root}
 	for len(queue) > 0 {
-		node := queue[0]
-		queue, result = queue[1:], append(result, node.Val)
+		node := queue[len(queue)-1]
+		queue, result = queue[:len(queue)-1], append(result, node.Val)
 		if node.Right != nil {
-			queue = append([]*TreeNode{node.Right}, queue...)
+			queue = append(queue, node.Right)
 		}
 		if node.Left != nil {
-			queue = append([]*TreeNode{node.Left}, queue...)
+			queue = append(queue, node.Left)
 		}
 	}
 	return result
