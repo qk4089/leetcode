@@ -19,33 +19,21 @@ package _46
 //	nums 中的所有整数 互不相同
 
 func permute(nums []int) [][]int {
-	ans, track := make([][]int, 0), make([]int, len(nums))
-	for i := 0; i < len(nums); i++ {
-		track[i] = 11
-	}
-	backtrace(0, nums, track, &ans)
+	ans := make([][]int, 0)
+	backtrace(nums, []int{}, make(map[int]bool), &ans)
 	return ans
 }
 
-func backtrace(idx int, nums, track []int, ans *[][]int) {
-	if idx == len(nums) {
+func backtrace(nums, track []int, used map[int]bool, ans *[][]int) {
+	if len(track) == len(nums) {
 		*ans = append(*ans, append([]int{}, track...))
 		return
 	}
-	for i := 0; i < len(nums); i++ {
-		if !contains(track, nums[i]) {
-			track[idx] = nums[i]
-			backtrace(idx+1, nums, track, ans)
-			track[idx] = 11
+	for _, num := range nums {
+		if !used[num] {
+			track, used[num] = append(track, num), true
+			backtrace(nums, track, used, ans)
+			track, used[num] = track[:len(track)-1], false
 		}
 	}
-}
-
-func contains(nums []int, target int) bool {
-	for i := 0; i < len(nums); i++ {
-		if nums[i] == target {
-			return true
-		}
-	}
-	return false
 }
