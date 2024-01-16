@@ -41,7 +41,7 @@ func (bt BitTree) query(l, r int) (res int) {
 }
 
 func countRangeSum(nums []int, lower, upper int) (cnt int) {
-	ans, preSum, allSum := 0, make([]int, len(nums)+1), make([]int, 3*len(nums)+1)
+	ans, preSum, allSum := 0, make([]int, len(nums)+1), make([]int, 1, 3*len(nums)+1)
 	for i := 0; i < len(nums); i++ {
 		preSum[i+1] = preSum[i] + nums[i]
 		allSum = append(allSum, preSum[i+1], preSum[i+1]-lower, preSum[i+1]-upper)
