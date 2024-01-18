@@ -23,20 +23,20 @@ package _1143
 //	text1 和 text2 仅由小写英文字符组成。
 
 func longestCommonSubsequence(text1 string, text2 string) int {
-	result := make([][]int, len(text1)+1)
-	for i := 0; i < len(text1)+1; i++ {
-		result[i] = make([]int, len(text2)+1)
+	m, n, dp := len(text1)+1, len(text2)+1, make([][]int, len(text1)+1)
+	for i := 0; i < m; i++ {
+		dp[i] = make([]int, n)
 	}
-	for i := 0; i < len(text1); i++ {
-		for j := 0; j < len(text2); j++ {
-			if text1[i] == text2[j] {
-				result[i+1][j+1] = result[i][j] + 1
+	for i := 1; i < m; i++ {
+		for j := 1; j < n; j++ {
+			if text1[i-1] == text2[j-1] {
+				dp[i][j] = dp[i-1][j-1] + 1
 			} else {
-				result[i+1][j+1] = max(result[i+1][j], result[i][j+1])
+				dp[i][j] = max(dp[i-1][j], dp[i][j-1])
 			}
 		}
 	}
-	return result[len(text1)][len(text2)]
+	return dp[m-1][n-1]
 }
 
 func max(x, y int) int {
