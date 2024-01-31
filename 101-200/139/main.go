@@ -40,17 +40,23 @@ func wordBreak(s string, wordDict []string) bool {
 		}
 	}
 	return dp[len(s)]
+	//return backtrace(s, 0, make([]int, len(s)), wdMap)
 }
 
 // timeout
-func backtrace(s string, wordDict map[string]int) bool {
-	if len(s) == 0 {
+func backtrace(s string, start int, memo []int, wordDict map[string]bool) bool {
+	if len(s) == start {
 		return true
 	}
-	for key, val := range wordDict {
-		if len(s) >= val && s[:val] == key && backtrace(s[val:], wordDict) {
+	if memo[start] != 0 {
+		return memo[start] == 1
+	}
+	for i := start; i < len(s); i++ {
+		if wordDict[s[start:i+1]] && backtrace(s, i+1, memo, wordDict) {
+			memo[start] = 1
 			return true
 		}
 	}
+	memo[start] = -1
 	return false
 }
