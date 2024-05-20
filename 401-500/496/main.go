@@ -1,5 +1,6 @@
 package _496
 
+//https://leetcode.cn/problems/next-greater-element-i/
 //nums1中数字x的下一个更大元素是指x在nums2中对应位置右侧的第一个比x大的元素。给你两个没有重复元素的数组nums1和nums2，
 //下标从0开始计数，其中nums1是nums2的子集。对于每个 0 <= i < nums1.length ，找出满足nums1[i] == nums2[j]的下标j，
 //并且在nums2确定nums2[j]的下一个更大元素 。如果不存在下一个更大元素，那么本次查询的答案是 -1 。
@@ -29,20 +30,22 @@ package _496
 //进阶：你可以设计一个时间复杂度为 O(nums1.length + nums2.length) 的解决方案吗？
 
 func nextGreaterElement(nums1 []int, nums2 []int) []int {
-	stack, result, idx := make([]int, 0), make([]int, len(nums1)), make(map[int]int)
-	for i := len(nums2) - 1; i >= 0; i-- {
-		for len(stack) > 0 && stack[len(stack)-1] <= nums2[i] {
+	ans, stack, memo := make([]int, len(nums1)), []int{nums2[len(nums2)-1]}, make(map[int]int)
+	for i := len(nums2) - 2; i >= 0; i-- {
+		for len(stack) > 0 && nums2[i] > stack[len(stack)-1] {
 			stack = stack[:len(stack)-1]
 		}
 		if len(stack) > 0 {
-			idx[nums2[i]] = stack[len(stack)-1]
-		} else {
-			idx[nums2[i]] = -1
+			memo[nums2[i]] = stack[len(stack)-1]
 		}
 		stack = append(stack, nums2[i])
 	}
 	for i := 0; i < len(nums1); i++ {
-		result[i] = idx[nums1[i]]
+		if val, exist := memo[nums1[i]]; exist {
+			ans[i] = val
+		} else {
+			ans[i] = -1
+		}
 	}
-	return result
+	return ans
 }
