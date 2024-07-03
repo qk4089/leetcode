@@ -14,10 +14,3 @@ func execute(word1, word2 string, i, j, dist int) int {
 		return min(execute(word1, word2, i+1, j+1, dist+1), min(execute(word1, word2, i, j+1, dist+1), execute(word1, word2, i+1, j, dist+1)))
 	}
 }
-
-func min(x, y int) int {
-	if x < y {
-		return x
-	}
-	return y
-}

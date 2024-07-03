@@ -1,5 +1,6 @@
 package _1143
 
+//https://leetcode.cn/problems/longest-common-subsequence/
 //给定两个字符串 text1 和 text2，返回这两个字符串的最长 公共子序列 的长度。如果不存在 公共子序列 ，返回 0 。
 //一个字符串的 子序列 是指这样一个新的字符串：它是由原字符串在不改变字符的相对顺序的情况下删除某些字符（也可以不删除任何字符）后组成的新字符串。
 
@@ -23,12 +24,12 @@ package _1143
 //	text1 和 text2 仅由小写英文字符组成。
 
 func longestCommonSubsequence(text1 string, text2 string) int {
-	m, n, dp := len(text1)+1, len(text2)+1, make([][]int, len(text1)+1)
-	for i := 0; i < m; i++ {
-		dp[i] = make([]int, n)
+	dp := make([][]int, len(text1)+1)
+	for i := 0; i <= len(text1); i++ {
+		dp[i] = make([]int, len(text2)+1)
 	}
-	for i := 1; i < m; i++ {
-		for j := 1; j < n; j++ {
+	for i := 1; i <= len(text1); i++ {
+		for j := 1; j <= len(text2); j++ {
 			if text1[i-1] == text2[j-1] {
 				dp[i][j] = dp[i-1][j-1] + 1
 			} else {
@@ -36,7 +37,7 @@ func longestCommonSubsequence(text1 string, text2 string) int {
 			}
 		}
 	}
-	return dp[m-1][n-1]
+	return dp[len(text1)][len(text2)]
 }
 
 func max(x, y int) int {
