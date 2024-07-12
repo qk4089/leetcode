@@ -1,4 +1,4 @@
-package _416
+package _518
 
 import (
 	"github.com/stretchr/testify/assert"
@@ -7,5 +7,5 @@ import (
 
 func Test(t *testing.T) {
 	a := assert.New(t)
-	a.True(canPartition([]int{1, 5, 10, 6}))
+	a.Equal(4, change(5, []int{1, 2, 5}))
 }

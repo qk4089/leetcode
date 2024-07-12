@@ -24,26 +24,25 @@ func canPartition(nums []int) bool {
 	for i := 1; i < len(nums); i++ {
 		maxV, sum = max(maxV, nums[i]), sum+nums[i]
 	}
-	avg := sum / 2
-	if sum%2 > 0 || maxV > avg {
+	target := sum / 2
+	if sum%2 > 0 || maxV > target {
 		return false
 	}
-	dp := make([][]bool, len(nums))
-	for i := 0; i < len(dp); i++ {
-		dp[i] = make([]bool, avg+1)
-		dp[i][0] = true
+	target, dp := sum/2, make([][]bool, len(nums)+1)
+	for i := 0; i <= len(nums); i++ {
+		dp[i] = make([]bool, target+1)
 	}
-	dp[0][nums[0]] = true
-	for i := 1; i < len(dp); i++ {
-		for j := 1; j < avg+1; j++ {
-			if j < nums[i] {
+	dp[0][0] = true
+	for i := 1; i <= len(nums); i++ {
+		for j := 1; j <= target; j++ {
+			if nums[i-1] > j {
 				dp[i][j] = dp[i-1][j]
 			} else {
-				dp[i][j] = dp[i-1][j] || dp[i-1][j-nums[i]]
+				dp[i][j] = dp[i-1][j-nums[i-1]] || dp[i-1][j]
 			}
 		}
 	}
-	return dp[len(nums)-1][avg]
+	return dp[len(nums)][target]
 }
 
 func max(x, y int) int {

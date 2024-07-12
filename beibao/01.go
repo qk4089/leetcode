@@ -74,25 +74,16 @@ func dynamic2(w int, items []int) int {
 
 // F(i, w) = max { F(i-1, w-cw) + vi，F(i-1, w) }
 func dynamic_with_price(w int, items, values []int) int {
-	result := make([][]int, len(items))
-	for i := 0; i < len(result); i++ {
-		result[i] = make([]int, w+1)
+	dp := make([][]int, len(items)+1)
+	for i := 0; i <= len(items); i++ {
+		dp[i] = make([]int, w+1)
 	}
-	for i := 0; i < w+1; i++ {
-		if i >= items[0] {
-			result[0][i] = values[0]
+	for i := 1; i <= len(items); i++ {
+		for j := items[i-1]; j <= w; j++ {
+			dp[i][j] = max(dp[i-1][j], dp[i-1][j-items[i-1]]+values[i-1])
 		}
 	}
-	for i := 1; i < len(items); i++ {
-		for j := 0; j < w+1; j++ {
-			if j >= items[i] {
-				result[i][j] = max(result[i-1][j-items[i]]+values[i], result[i-1][j])
-			} else {
-				result[i][j] = result[i-1][j]
-			}
-		}
-	}
-	return result[len(items)-1][w]
+	return dp[len(items)][w]
 }
 
 // 使用滚动数组优化
